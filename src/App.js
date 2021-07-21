@@ -1,19 +1,29 @@
 import React from "react";
-import './App.css';
-import Header from "./Header";
+import Feed from "./Feed";
+import Navbar from "./Navbar";
+import SideBar from "./SideBar";
+import "./App.css";
+import Widget from "./Widget";
+import Login from "./Login";
+import { useStateValue } from "./StateProvider";
 
-function App() {
+
+export default function App() {
+  const [{user},dispatch]=useStateValue();
   return (
-    //BEM naming convention
     <div className="app">
-      
-      <Header/>
-      {/* App body */}
-      {/* Sidebar */}
-      {/* Feed */}
-      {/* Widgets */}
+      {!user ? (
+        <Login/>
+      ) : (
+        <>
+          <Navbar />
+          <div className="app__body">
+            <SideBar />
+            <Feed />
+            <Widget />
+          </div>
+        </>
+      )}
     </div>
   );
 }
-
-export default App;
